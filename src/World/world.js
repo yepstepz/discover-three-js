@@ -1,7 +1,7 @@
 import { MathUtils } from 'https://unpkg.com/three/build/three.module.js';
 
 import { createCamera } from './components/camera.js';
-import { createCube } from './components/cube.js';
+import { createMeshGroup } from './components/meshGroup.js';
 import { createScene } from './components/scene.js';
 import { createLights } from './components/lights.js';
 
@@ -21,24 +21,17 @@ class World {
     // 1. Create an instance of the World app
     constructor(container) {
         camera = createCamera();
-        scene = createScene();
         renderer = createRenderer();
+        scene = createScene();
         loop = new Loop(camera, scene, renderer);
         container.append(renderer.domElement);
 
-        const cube = createCube();
-
-        const { ambientLight, mainLight, spotLight, hemisphereLight } = createLights();
-
-
-
         const controls = createControls(camera, renderer.domElement);
-        controls.enablePan = false
-        controls.enableDamping = true;
+        const { ambientLight, mainLight } = createLights();
+        const meshGroup = createMeshGroup();
 
-        loop.updatables.push(controls);
-
-        scene.add(mainLight, hemisphereLight,  cube);
+        loop.updatables.push(controls, meshGroup);
+        scene.add(ambientLight, mainLight, meshGroup);
 
         const resizer = new Resizer(container, camera, renderer);
     }
