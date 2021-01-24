@@ -4,7 +4,7 @@ import { World } from './World/world.js';
 function main() {
     // Get a reference to the container element
     const container = document.querySelector('#scene-container');
-    const buttonMove = document.querySelector('#move');
+
 
     // 1. Create an instance of the World app
     const world = new World(container)

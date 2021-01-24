@@ -28,7 +28,9 @@ class World {
 
         const cube = createCube();
 
-        const light = createLights();
+        const { ambientLight, mainLight, spotLight, hemisphereLight } = createLights();
+
+
 
         const controls = createControls(camera, renderer.domElement);
         controls.enablePan = false
@@ -36,7 +38,7 @@ class World {
 
         loop.updatables.push(controls);
 
-        scene.add(cube, light);
+        scene.add(mainLight, hemisphereLight,  cube);
 
         const resizer = new Resizer(container, camera, renderer);
     }

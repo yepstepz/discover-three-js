@@ -1,17 +1,23 @@
-import { DirectionalLight, PointLight, SpotLight, RectAreaLight } from 'https://unpkg.com/three/build/three.module.js';
+import {
+    DirectionalLight,
+    PointLight,
+    SpotLight,
+    RectAreaLight,
+    AmbientLight,
+    HemisphereLight,
+} from 'https://unpkg.com/three/build/three.module.js';
 
 function createLights() {
-    // Create a directional light
-    const light = new DirectionalLight('white', 8);
+    const hemisphereLight = new HemisphereLight('white', 'grey', 3)
+    const ambientLight = new AmbientLight('white', 2);
 
-    // move the light right, up, and towards us
-    light.position.set(10, 10, 10);
+    const mainLight = new DirectionalLight('white', 10);
+    mainLight.position.set(10, 10, 10);
 
-    light.tick = (delta) => {
+    const spotLight = new SpotLight('white', 100);
+    spotLight.position.set(5, 5, -5);
 
-    }
-
-    return light;
+    return { ambientLight, mainLight, spotLight, hemisphereLight };
 }
 
 export { createLights };
