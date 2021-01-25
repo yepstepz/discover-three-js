@@ -18,6 +18,7 @@ function createMeshGroup() {
 
     const material = new MeshStandardMaterial({
         color: 'indigo',
+        flatShading: true,
     });
 
     // create one prototype sphere

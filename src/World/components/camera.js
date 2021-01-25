@@ -9,16 +9,7 @@ function createCamera() {
     );
 
     // move the camera back so we can view the scene
-    camera.position.set(0, 0, 10);
-    let direction = 1;
-    camera.tick = (delta) => {
-        // increase the cube's rotation each frame
-        // camera.position.z += 0.16 * direction;
-        // if (camera.position.z % 10 <= 0.16 ) {
-        //     direction = direction * -1;
-        // }
-    };
-
+    camera.position.set(-5, 5, 7);
 
     return camera;
 }
