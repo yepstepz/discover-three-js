@@ -17,7 +17,10 @@ class Train extends Group {
             this.meshes.smallWheelRear,
             this.meshes.smallWheelCenter,
             this.meshes.smallWheelFront,
-            this.meshes.bigWheel
+            this.meshes.bigWheel,
+            this.meshes.cabinGroup,
+            this.meshes.railsGroup,
+            this.meshes.smokeGroup
         )
     }
 
@@ -26,6 +29,9 @@ class Train extends Group {
         this.meshes.smallWheelRear.rotation.y += wheelSpeed * delta;
         this.meshes.smallWheelCenter.rotation.y += wheelSpeed * delta;
         this.meshes.smallWheelFront.rotation.y += wheelSpeed * delta;
+        this.meshes.smokeGroup.children.forEach((child) => {
+            child.rotation.y += wheelSpeed * delta;
+        })
     }
 }
 

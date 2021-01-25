@@ -11,7 +11,17 @@ function createMaterials() {
         flatShading: true,
     });
 
-    return { body, detail };
+    const additional = new MeshStandardMaterial({
+        color: 'yellow',
+        flatShading: true,
+    });
+
+    const smoke = new MeshStandardMaterial({
+        color: 'white',
+        flatShading: true,
+    });
+
+    return { body, detail, additional, smoke };
 }
 
 export { createMaterials }
