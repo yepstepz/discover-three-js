@@ -1,10 +1,11 @@
-import { MathUtils } from 'https://unpkg.com/three/build/three.module.js';
+import { MathUtils, Vector3 } from 'https://unpkg.com/three/build/three.module.js';
 
 import { createCamera } from './components/camera.js';
 import { createMeshGroup } from './components/meshGroup.js';
 import { createScene } from './components/scene.js';
 import { createLights } from './components/lights.js';
 import { Train } from './components/Train/Train.js';
+import { loadBirds } from './components/birds/birds.js';
 import {
     createAxesHelper,
     createGridHelper,
@@ -21,6 +22,9 @@ let camera;
 let renderer;
 let scene;
 let loop;
+let controls;
+
+let birds
 
 class World {
     // 1. Create an instance of the World app
@@ -31,12 +35,11 @@ class World {
         loop = new Loop(camera, scene, renderer);
         container.append(renderer.domElement);
 
-        const controls = createControls(camera, renderer.domElement);
+        controls = createControls(camera, renderer.domElement);
         const { ambientLight, mainLight } = createLights();
-        const train = new Train();
-        loop.updatables.push(controls, train);
+        loop.updatables.push(controls);
 
-        scene.add(createAxesHelper(), createGridHelper(), ambientLight, mainLight, train);
+        scene.add(ambientLight, mainLight);
 
 
         const resizer = new Resizer(container, camera, renderer);
@@ -54,6 +57,17 @@ class World {
 
     stop() {
         loop.stop();
+    }
+
+    async init() {
+        // asynchronous setup here
+        // load bird models
+        birds = await loadBirds();
+        const { parrot, flamingo, stork } = birds
+        // move the target to the center of the front bird
+        controls.target.copy(parrot.position);
+
+        scene.add(parrot, flamingo, stork);
     }
 }
 

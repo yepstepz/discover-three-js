@@ -4,8 +4,9 @@ function createControls(camera, canvas) {
     const controls = new OrbitControls(camera, canvas);
     controls.enableDamping = true;
 
-    controls.target.y = 1;
-    controls.tick = () => controls.update();
+    controls.tick = () => {
+        controls.update();
+    }
 
     return controls;
 }
